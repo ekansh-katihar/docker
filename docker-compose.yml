@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+  
+  cassandra:
+      image: cassandra:latest
+      container_name: cassandra-db
+      ports:
+        - "9042:9042"
+      volumes:
+        - cassandra-data:/var/lib/cassandra
+
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb-db
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+volumes:
+  mysql-data:
+  cassandra-data:
+  influxdb-data:
